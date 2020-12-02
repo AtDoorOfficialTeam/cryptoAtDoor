@@ -1,10 +1,10 @@
-import React from 'react';
+import React from "react";
 
 const Footer = () => (
-  <footer>
+  <div className="footer fixed-bottom">
     <hr />
     <p>Footer</p>
-  </footer>
+  </div>
 );
 
 export default Footer;
