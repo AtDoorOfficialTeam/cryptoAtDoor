@@ -1,28 +1,52 @@
 import React, { Component } from "react";
 import axios from "axios";
+import * as config from "../../../src/config";
+import * as mediaConfig from "../../../src/mediaConfig";
 
 export default class BitCoin extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      cryptoAddress: ""
+      cryptoAddress: "",
+      cryptoBalance: ""
     };
   }
 
-  //   handleChange = ({ target }) => {
-  //     // console.log(("target.value", target.name + ":" + target.value));
-  //     this.setState({ [target.name]: target.value });
-  //   };
+  handleChange = ({ target }) => {
+    this.setState({ [target.name]: target.value });
+  };
+
+  handleKeyDown = e => {
+    if (e.key === "Enter") {
+      axios
+        .get(
+          config.BITCOIN_MAINNET_BASE_URL +
+            config.BITCOIN_ADDRESS_DETAIL_PATH +
+            this.state.cryptoAddress +
+            `/balance`
+        )
+        .then(response => {
+          console.log(
+            "🚀 ~ file: BitCoin.js ~ line 23 ~ BitCoin ~ .then ~ response",
+            response
+          );
+          this.setState({ cryptoBalance: response.data.final_balance / 1e8 });
+        })
+        .catch(err => {
+          console.log("🚀 ~ file: BitCoin.js ~ line 29 ~ BitCoin ~ err", err);
+        });
+    }
+  };
 
   render() {
-    const { cryptoAddress } = this.state;
+    const { cryptoAddress, cryptoBalance } = this.state;
     return (
       <>
         <div className="container">
           <p>BitCoin Page</p>
           <div className="row">
             <div className="col-2">
-              <img src="https://res.cloudinary.com/dc3dylylv/image/upload/v1606891005/Crypto%20Logos%20SVG/bitcoin-btc-logo_az4rah.svg" />
+              <img src={mediaConfig.BITCOIN_LOGO_SVG} />
             </div>
             <div className="col-10">
               <input
@@ -34,12 +58,15 @@ export default class BitCoin extends Component {
                 name="cryptoAddress"
                 defaultValue={cryptoAddress}
                 onChange={this.handleChange}
+                onKeyDown={this.handleKeyDown}
               />
             </div>
           </div>
           <div className="row">
-            <p>Entered Address is : </p>
-            {cryptoAddress}
+            <p>Entered Address is : {cryptoAddress}</p>
+          </div>
+          <div className="row">
+            <p>Balance is : {cryptoBalance}</p>
           </div>
         </div>
       </>
