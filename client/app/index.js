@@ -10,6 +10,9 @@ import Home from "./components/Home/Home";
 
 import HelloWorld from "./components/HelloWorld/HelloWorld";
 import BitCoin from "./components/BitCoin/BitCoin";
+import Tezos from "./components/Tezos/Tezos";
+import USDC from "./components/USDC/USDC";
+import Ethereum from "./components/Ethereum/Ethereum";
 
 import "./styles/styles.scss";
 
@@ -20,6 +23,10 @@ render(
         <Route exact path="/" component={Home} />
         <Route path="/helloworld" component={HelloWorld} />
         <Route path="/bitcoin" component={BitCoin} />
+        <Route path="/tezos" component={Tezos} />
+        <Route path="/usdc" component={USDC} />
+        <Route path="/ethereum" component={Ethereum} />
+
         <Route component={NotFound} />
       </Switch>
     </App>
