@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import axios from "axios";
 import * as config from "../../../src/config";
 import * as mediaConfig from "../../../src/mediaConfig";
+import { Image, FigureImage, Figure } from "react-bootstrap";
 
 export default class BitCoin extends Component {
   constructor(props) {
@@ -43,10 +44,18 @@ export default class BitCoin extends Component {
     return (
       <>
         <div className="container">
-          <p>BitCoin Page</p>
-          <div className="row">
+          <div className="row justify-content-md-center">
+            <h2>BitCoin Page</h2>
             <div className="col-2">
-              <img src={mediaConfig.BITCOIN_LOGO_SVG} />
+              <Figure>
+                <Figure.Image
+                  width={171}
+                  height={180}
+                  alt="171x180"
+                  src={mediaConfig.BITCOIN_LOGO_SVG}
+                />
+                <Figure.Caption>Bitcoin</Figure.Caption>
+              </Figure>
             </div>
             <div className="col-10">
               <input
